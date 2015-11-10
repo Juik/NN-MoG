@@ -1,0 +1,79 @@
+eps=0.01;epoch_num=2000;
+Step 0 Train CE 0.69324 Validation CE 0.69323
+Step 100 Train CE 0.69317 Validation CE 0.69316
+Step 200 Train CE 0.69312 Validation CE 0.69311
+Step 300 Train CE 0.69307 Validation CE 0.69306
+Step 400 Train CE 0.69301 Validation CE 0.69299
+Step 500 Train CE 0.69292 Validation CE 0.69291
+Step 600 Train CE 0.69280 Validation CE 0.69278
+Step 700 Train CE 0.69262 Validation CE 0.69260
+Step 800 Train CE 0.69234 Validation CE 0.69233
+Step 900 Train CE 0.69193 Validation CE 0.69192
+Step 1000 Train CE 0.69131 Validation CE 0.69131
+Step 1100 Train CE 0.69039 Validation CE 0.69041
+Step 1200 Train CE 0.68900 Validation CE 0.68906
+Step 1300 Train CE 0.68692 Validation CE 0.68704
+Step 1400 Train CE 0.68384 Validation CE 0.68407
+Step 1500 Train CE 0.67931 Validation CE 0.67969
+Step 1600 Train CE 0.67271 Validation CE 0.67333
+Step 1700 Train CE 0.66327 Validation CE 0.66425
+Step 1800 Train CE 0.65006 Validation CE 0.65154
+Step 1900 Train CE 0.63214 Validation CE 0.63430
+Step 1999 Train CE 0.60901 Validation CE 0.61204
+Error: Train 0.60875 Validation 0.61204 Test 0.60885
+Press Enter to exit.
+----------------------
+eps=0.1
+Step 0 Train CE 0.69321 Validation CE 0.69319
+Step 100 Train CE 0.68906 Validation CE 0.68914
+Step 200 Train CE 0.55319 Validation CE 0.55591
+Step 300 Train CE 0.24521 Validation CE 0.25062
+Step 400 Train CE 0.14146 Validation CE 0.14620
+Step 500 Train CE 0.10160 Validation CE 0.10732
+Step 600 Train CE 0.08076 Validation CE 0.08833
+Step 700 Train CE 0.06755 Validation CE 0.07749
+Step 800 Train CE 0.05810 Validation CE 0.07069
+Step 900 Train CE 0.05086 Validation CE 0.06617
+Step 1000 Train CE 0.04506 Validation CE 0.06303
+Step 1100 Train CE 0.04031 Validation CE 0.06079
+Step 1200 Train CE 0.03634 Validation CE 0.05914
+Step 1300 Train CE 0.03298 Validation CE 0.05790
+Step 1400 Train CE 0.03011 Validation CE 0.05695
+Step 1500 Train CE 0.02763 Validation CE 0.05619
+Step 1600 Train CE 0.02546 Validation CE 0.05558
+Step 1700 Train CE 0.02356 Validation CE 0.05508
+Step 1800 Train CE 0.02188 Validation CE 0.05467
+Step 1900 Train CE 0.02038 Validation CE 0.05433
+Step 1999 Train CE 0.01906 Validation CE 0.05405
+Error: Train 0.01905 Validation 0.05405 Test 0.06763
+Press Enter to exit.
+---------------------
+eps=1
+Step 0 Train CE 0.69315 Validation CE 0.69317
+Step 100 Train CE 0.69315 Validation CE 0.69317
+Step 200 Train CE 0.69315 Validation CE 0.69317
+Step 300 Train CE 0.69315 Validation CE 0.69317
+Step 400 Train CE 0.69315 Validation CE 0.69317
+Step 500 Train CE 0.69315 Validation CE 0.69317
+Step 600 Train CE 0.69315 Validation CE 0.69317
+Step 700 Train CE 0.69315 Validation CE 0.69317
+Step 800 Train CE 0.69315 Validation CE 0.69317
+Step 900 Train CE 0.69315 Validation CE 0.69317
+Step 1000 Train CE 0.69315 Validation CE 0.69317
+Step 1100 Train CE 0.69315 Validation CE 0.69317
+Step 1200 Train CE 0.69315 Validation CE 0.69317
+Step 1300 Train CE 0.69315 Validation CE 0.69317
+Step 1400 Train CE 0.69315 Validation CE 0.69317
+Step 1500 Train CE 0.69315 Validation CE 0.69317
+Step 1600 Train CE 0.69315 Validation CE 0.69317
+Step 1700 Train CE 0.69315 Validation CE 0.69317
+Step 1800 Train CE 0.69315 Validation CE 0.69317
+Step 1900 Train CE 0.69315 Validation CE 0.69317
+Step 1999 Train CE 0.69315 Validation CE 0.69317
+Error: Train 0.69315 Validation 0.69317 Test 0.69313
+Press Enter to exit.
+----------------------
+
+
+
+

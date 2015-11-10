@@ -1,4 +1,5 @@
 from util import *
+from kmeans import *
 import sys
 import matplotlib.pyplot as plt
 plt.ion()
@@ -215,14 +216,15 @@ def LoadModel(modelfile):
   return model['W1'], model['W2'], model['b1'], model['b2'], model['train_error'], model['valid_error']
 
 def main():
-  num_hiddens = 10
+  num_hiddens = 15
   eps = 0.2
   momentum = 0.5
   num_epochs = 1000
   print num_hiddens
   W1, W2, b1, b2, train_error, valid_error, mean_classification_error, train_rate, valid_rate = TrainNN(num_hiddens, eps, momentum, num_epochs)
+  ShowMeans(W1)
+
   DisplayErrorPlot(train_error, valid_error,mean_classification_error) 
-  DisplayFractionPlot(train_rate,valid_rate)
 
 if __name__ == '__main__':
   main()

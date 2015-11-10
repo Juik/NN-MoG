@@ -1,5 +1,4 @@
-#hw for 2.1 
-
+#This file is for question 2.5 in assignment 2.
 import numpy as np 
 from l2_distance import l2_distance
 from run_knn import run_knn
@@ -8,8 +7,6 @@ import matplotlib.pyplot as plt
 
 def init():
 	train_data, valid_data, test_data, train_label, valid_label, test_label = LoadData('digits.npz')
-	print train_data[:,0:200].shape
-	print valid_data.shape
 	# train_data, train_label = load_train()
 	# valid_data, valid_label = load_valid()
 	# test_data, test_label = load_test()
@@ -17,7 +14,9 @@ def init():
 	cl_rate_valid = []
 	index=[]
 	for i in [1,3,5,7,9]:
-		valid_labels_knn = run_knn(i, train_data[:,0:200], train_label[:,0:200], valid_data)
+		valid_labels_knn = run_knn(i, train_data.T, train_label.T, valid_data.T)
+		# print valid_labels_knn.shape
+		print valid_label.shape
 
 		num_correct_prediction = 0 
 		num_total_points = 0 
@@ -26,7 +25,7 @@ def init():
 		count = 0
 		correct_count = 0
 		for valid_label_knn in valid_labels_knn:
-			if valid_label_knn == valid_label[count]:
+			if valid_label_knn == valid_label[0][count]:
 				correct_count = correct_count + 1
 			count = count + 1
 
@@ -37,12 +36,12 @@ def init():
 
 	cl_rate_test = []
 	for i in [1,3,5,7,9]:
-		test_labels_knn = run_knn(i, train_data[:,0:200], train_label[:,0:200], test_data)
+		test_labels_knn = run_knn(i, train_data.T, train_label.T, test_data.T)
 
 		count = 0
 		correct_count = 0
 		for test_label_knn in test_labels_knn:
-			if test_label_knn == test_label[count]:
+			if test_label_knn == test_label[0][count]:
 				correct_count = correct_count + 1
 			count = count + 1
 		# print 'the classification rate of test would be :'
@@ -58,13 +57,12 @@ def init():
 	plt.figure(1)
 	plt.plot(index, cl_rate_test, marker='o', label='test_set')
 	plt.plot(index,cl_rate_valid,marker='x',label='valid_set')
-	legend = plt.legend()
+	legend = plt.legend(loc=4)
 	plt.grid()
 	plt.xlabel('k')	
 	plt.ylabel('Classification Rate')
 	plt.axis([1, 9, 0.7, 1])
 	plt.show()
-
 
 if __name__ == '__main__':
 	init()

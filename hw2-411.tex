@@ -1,0 +1,348 @@
+\documentclass[12pt]{article}
+
+\usepackage {fullpage}
+%\usepackage {palatino}
+\usepackage {epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\textwidth 6.5in
+\topmargin 0in \headheight 0in
+%\headsep 0.5in
+\textheight 8.7in
+\oddsidemargin 0in
+\evensidemargin 0in
+\parskip 0.1in
+\parindent 0in
+
+\pagestyle{empty}
+
+\def\beqa#1\eeqa{\begin{eqnarray}#1\end{eqnarray}}
+\newcommand{\bmu}{{\boldsymbol{\mu}}}
+\newcommand{\bSigma}{{\boldsymbol{\Sigma}}}
+\newcommand{\bx}{{\bf{x}}}
+
+
+\newcommand{\items}{\vspace{-.25in}\begin{itemize}\setlength{\itemsep}{1mm}}
+\newcommand{\degree}{{\raisebox{.6ex}[0ex][0ex]{\small $\circ$}}}
+\newcommand{\cut}[1]{}
+\newcommand{\eg}{{\it eg \/}}
+\newcommand{\ie}{{\it ie \/}}
+\newcommand{\bighead}[1]{\begin{slide}\begin{center}{\bf \large
+\underline{#1}}\end{center}}
+\newcommand{\numbs}{\vspace{-.25in}\begin{enumerate}\setlength{\itemsep}{1mm}}
+\newcommand{\itemss}{\vspace{-.05in}\begin{itemize}\setlength{\itemsep}{1mm}}
+
+\newcommand{\indentit}{\mbox{  }\hspace{.1in}}
+\newcommand{\vbon}{\begin{verbatim}}
+\newcommand{\vboff}{\end{verbatim}}
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\xx}{\mathbf{x}}
+\newcommand{\zz}{\mathbf{z}}
+\newcommand{\ttt}{\mathbf{t}}
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pderi}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\deri}[2]{\frac{{\rm d} #1}{{\rm d} #2}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\diag}{diag}
+
+\begin{document}
+
+\begin{center}
+{\bf CSC 411/2515}\\
+{\bf Machine Learning and Data Mining}\\
+{\large \bf Assignment 2}\\
+{\bf Out:  Oct. 28}\\
+{\bf Due:  Nov 11 [noon]}
+\end{center}
+
+\section*{Overview}
+
+In this assignment, you will build a decision tree, and experiment with a
+neural network and a naive Bayes model. Some code that implements a neural
+network with one hidden layer, and the naive Bayes model will be provided for you (both MATLAB and Python).
+
+You will be working with the following dataset:
+
+{\bf Digits}: The file {\tt digits.mat} contains 6 sets of $16 \times 16$
+greyscale images in vector format (the pixel intensities are between 0 and 1 and
+were read into the vectors in a raster-scan manner). The images contain
+centered, handwritten 2's and 3's, scanned from postal envelopes. {\tt train2}
+and {\tt train3} contain examples of 2's and 3's respectively to be used for
+training. There are 300 examples of each digit, stored as $256 \times 300$
+matrices. Note that each data vector is a column of the matrix. {\tt valid2} and {\tt valid3} contain data to be used for validation
+(100 examples of each digit) and {\tt test2} and {\tt test3} contain test data
+to be used for final evaluation {\bf only} (200 examples of each digit).
+
+\section{EM for Mixture of Gaussians (15 pts) }
+
+Let us consider a Gaussian mixture model:
+\beqa
+ p(\bx) = \sum_{k=1}^K \pi_k {\cal{N}}(\bx | \bmu_k, \bSigma_k)
+\eeqa
+
+Consider a special case of a Gaussian mixture model in which the covariance matrices
+$\bSigma_k$ of the components are all constrained to have a common value $\bSigma$. 
+In other words $\bSigma_k = \bSigma$, for all $k$. 
+Derive
+the EM equations for maximizing the likelihood function under such a model.
+
+
+\section{Neural Networks (40 points)}
+
+Code for training a neural network with one hidden layer of logistic units,
+logistic output units and a cross entropy error function is included. The main components are:
+
+MATLAB
+\begin{itemize}
+\item {\tt init\_nn.m}: initializes the weights and loads the training, validation and test data.
+\item {\tt train\_nn.m}: runs {\tt num\_epochs} of backprop learning.
+\item {\tt test\_nn.m}: Evaluates the network on the test set.
+\end{itemize}
+
+Python
+\begin{itemize}
+\item {\tt nn.py} : Methods to perform initialization, backprop learning and
+  testing.
+\end{itemize}
+
+\subsection{Basic generalization [8 points]}
+
+Train a neural network with 10 hidden units. You should
+first use {\tt init\_nn} to initialize the net, and then execute {\tt train\_nn}
+repeatedly (more than 5 times). Note that {\tt train\_nn} runs 100 epochs each
+time and will output the statistics and plot the error curves. Alternatively, if
+you wish to use Python, set the appropriate number of epochs in {\tt nn.py} and
+run it. Examine the statistics and plots of training error and validation error (generalization).
+How does the network's performance differ on the training set versus the validation set
+during learning? Show a plot of error curves (training and validation) to support your argument.
+
+\subsection{Classification error [8 points]}
+
+You should implement an alternative performance measure to the cross entropy, the mean
+classification error. You can
+consider the output correct if the correct label is given a higher probability
+than the incorrect label.  You should then count up the total number of
+examples that are classified incorrectly according to this criterion for
+training and validation respectively, and maintain this statistic at the end of
+each epoch. Plot the classification error vs. number of epochs, for both
+training and validation.
+
+\subsection{Learning rate [8 points]}
+
+Try different values of the learning rate $\epsilon$ (``eps'') defined in {\tt
+init\_nn.m} (and in {\tt nn.py}). You should reduce it to $.01$, and increase it to $0.2$ and
+$0.5$. What happens to the convergence properties of the algorithm (looking at
+both cross entropy and \%Correct)? Try momentum of $\{0.0, 0.5, 0.9\}$. How does
+momentum affect convergence rate ? How would you choose the best value of these
+parameters?
+
+\subsection{Number of hidden units [8 points]}
+
+Set the learning rate $\epsilon$ to $.02$, momentum to $0.5$ and try different numbers of
+hidden units on this problem (you might also need to adjust
+\texttt{num\_epochs} accordingly in \texttt{init\_nn.m}). You should use two values $\{2, 5\}$, which are
+smaller than the original and two others $\{30, 100\}$, which are larger.
+Describe the effect of this modification on the convergence properties, and the
+generalization of the network.
+
+\subsection{Compare $k$-NN and Neural Networks (8 points)}
+
+Try $k$-NN on this digit classification task using the code provided in the
+first assignment, and compare the results with those you got using neural
+networks and naive Bayes. Briefly comment on the differences between
+these classifiers.
+
+
+
+\section{Mixtures of Gaussians (45 points)}
+
+\subsection{Code}
+
+The Matlab file {\tt mogEM.m} implements the EM algorithm for the MoG model.\\
+The file {\tt mogLogProb.m} computes the log-probability of data under a MoG model.\\
+The file {\tt kmeans.m} contains the k-means algorithm.\\
+The file {\tt distmat.m} contains a function that efficiently computes pairwise distances between
+sets of vectors.  It is used in the implementation of k-means. \\
+
+Similarly, {\tt mogEM.py} implements methods related to training MoG models.\\
+The file {\tt kmeans.py} implements k-means.\\
+
+As always, read and understand code before using it.
+
+\subsection{Training (15 points)}
+
+\label{sec:training}
+
+
+
+The Matlab variables {\tt train2} and {\tt train3} each contain 300 training
+examples of handwritten 2's and 3's, respectively.
+Take a look at some of them to make sure you have transferred the data properly.
+In Matlab, plot the digits as images using {\tt imagesc(reshape(vector,16,16))}, which converts a
+256-vector to an 16x16 image.  You may also need to use {\tt colormap(gray)} to obtain grayscale image.
+Look at {\tt kmeans.py} to see an example of how to do this in Python.
+
+
+For each training set separately, train a mixture-of-Gaussians using the code in {\tt
+mogEM.m}. Let the number of clusters in the Gaussian mixture be 2, and the
+minimum variance be 0.01. You will also need to experiment with the
+parameter settings, e.g. {\tt randConst}, in that program to get sensible clustering results.
+And you'll need to execute {\tt mogEM} a few times for each digit, and see the local
+optima the EM algorithm finds. Choose a good model for each digit from your
+results.
+
+
+
+For each model, show both the mean vector(s) and variance vector(s) as
+images, and show the mixing proportions for the clusters within each model.
+Finally, provide $\log P(Training Data)$ for each model.
+
+
+\subsection{Initializing a mixture of Gaussians with k-means (10 points)}
+
+Training a MoG model with many components tends to be slow.  People have found that
+initializing the means of the mixture components by running a few iterations of k-means
+tends to speed up convergence. You will experiment with this method of initialization.
+You should do the following.
+
+
+\begin{itemize}
+\item Read and understand {\tt kmeans.m} and {\tt distmat.m} (Alternatively,
+{\tt kmeans.py}).
+
+\item Change the initialization of the means in {\tt mogEM.m} (or {\tt mogEm.py}) to use the k-means algorithm.
+As a result of the change the model should run k-means on the training data and use the returned means as the
+starting values for {\tt mu}.  Use 5 iterations of k-means.
+
+\item Train a MoG model with 20 components on all 600 training vectors (both 2's and 3's) using
+both the original initialization and the one based on k-means.
+Comment on the speed of convergence as well as the final log-prob resulting from
+the two initialization methods.
+
+
+
+\end{itemize}
+
+
+
+\subsection{Classification using MoGs (20 points)}
+
+Now we will investigate using the trained mixture models for
+classification. The goal is to decide which digit class $d$ a new
+input image $\xx$ belongs to.  We'll assign $d=1$ to the 2's and
+$d=2$ to the 3's.
+
+For each mixture model, after training, the likelihoods $P(\xx|d)$ for
+each class can be computed for an image $\xx$ by consulting
+the model trained on examples from that class; probabilistic
+inference can be used to compute $P(d|\xx)$, and the most probable
+digit class can be chosen to classify the image.
+
+Write a program that computes $P(d=1|\xx)$ and $P(d=2|\xx)$ based
+on the outputs of the two trained models. You can use {\tt
+mogLogProb.m} (or the method {\tt mogLogProb} in {\tt mogEm.py}) to compute the
+log probability of examples under any model.
+
+You will compare models trained with the same number of mixture components. You
+have trained 2's and 3's models with 2 components.  Also train models with more
+components: 5, 15 and 25.  For each number, use your program to classify
+the validation and test examples.
+
+For each of the validation and test examples, compute $P(d|\xx)$ and classify the
+example. Plot the results. The plot should have 3 curves of
+classification error rates versus number of mixture components
+(averages are taken over the two classes):
+
+
+\begin{itemize}
+\item The average classification error rate, on the training set
+\item The average classification error rate, on the validation set
+\item The average classification error rate, on the test set
+\end{itemize}
+
+
+
+%\vspace{.1in}
+
+
+Provide answers to these questions:
+
+\vspace{.2in}
+
+\numbs
+
+
+\item You should find that the error rates on the training sets generally
+decrease as the number of clusters increases. Explain why.
+
+\item Examine the error rate curve for the test set and discuss its properties. Explain the trends that you observe.
+
+
+
+
+
+\item If you wanted to choose a particular
+model from your experiments as the best, how would you choose it?
+If your aim is to achieve the lowest error
+rate possible on the new images your system will receive, which model
+(number of clusters) would you select? Why?
+
+
+
+\end{enumerate}
+
+
+
+
+\subsection{Bonus Question: Mixture of Gaussians vs Neural Network (10 points)}
+
+
+Choose the best mixture of Gaussian classifier you have got so far according to
+your answer to question 3 in the section above. Compare this mixture of Gaussian
+classifier with the neural network. For this comparison, set the number of
+hidden units equal to the number of mixture components in the mixture model
+(digit 2 and 3 combined). Visualize the input to hidden weights as images to see
+what your network has learned. You can use the same trick as mentioned in
+section 2 to visualize these vectors as images.
+
+
+
+You can visualize how the input to hidden weights change during training.
+Discuss the classification performance of the two models and compare the hidden
+unit weights in the neural network with the mixture components in the mixture
+model.
+
+
+
+
+
+\section{Write up}
+
+Hand in answers to all the questions in the parts above. The goal of your write-up is to document
+the experiments you have done and your main findings. So be sure to explain the results.
+The answers to your questions should be in pdf form and turned in along with your code. Package
+your code and a copy of the write-up pdf document into a zip or tar.gz file called
+A1-*your-student-id*.[zip|tar.gz]. Only include functions and scripts that you 
+modified. Submit this file on MarkUs. Do not turn in a hard copy of the write-up.
+
+
+%Hand in answers to all the questions in the parts above.  The goal of your
+%write-up is to document the experiments you've done and your main findings.  So
+%be sure to explain the results.
+%It is up to you whether you would like to do the write-up of Part 1 (Decision
+%Trees) by hand or on the computer.  In either case you should turn in a
+%hardcopy of your answer to Part I.  The answers to the rest of the questions
+%should be in pdf form, and turned in along with your code.
+
+%Package your code and a copy of the write-up \texttt{pdf} document using
+%\texttt{zip} or \texttt{tar.gz} in a file called 
+%\texttt{CSC411-A2-*your-student-id*.[zip|tar.gz]}. Only include functions and
+%scripts that you modified. 
+%Submit this on MarkUs by October 17, 2014, noon. 
+%Turn in a hard copy of the write-up of Part 1 before class on October 17
+%as well.
+
+\end{document}
+
